@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Spendenformular bearbeiten</h1>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Hintergrundfarbe:"></h:outputLabel>
+				<p:colorPicker id="bgColor"
+					value="#{spendeFormEditController.formConfig.bgColor}" widgetVar="bgPicker">
+				</p:colorPicker>
+				<h:outputLabel value="Textfarbe:"></h:outputLabel>
+				<p:colorPicker id="textColor"
+					value="#{spendeFormEditController.formConfig.textColor}"
+					widgetVar="textPicker">
+				</p:colorPicker>
+				<h:outputLabel value="URL des Formulars:"></h:outputLabel>
+				<p:inputTextarea id="url" rows="6" cols="30" readonly="true"
+					value="#{spendeFormEditController.url}" />
+				<h:outputLabel value="Titel:"></h:outputLabel>
+				<p:inputText id="titel" value="#{spendeFormEditController.formConfig.titel}">
+				</p:inputText>
+			</h:panelGrid>
+			<p:commandButton value="Update URL" update="url" />
+			<p:commandButton value="OK" action="#{spendeFormEditController.doOk}"
+				ajax="false" />
+		</h:form>
+	</ui:define>
+</ui:composition>

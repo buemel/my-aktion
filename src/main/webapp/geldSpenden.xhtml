@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title><h:outputLabel value="#{geldSpendenController.titel}"></h:outputLabel></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<h:outputStylesheet name="css/screen.css" />
+	<f:metadata>
+		<f:viewParam id="bgColor" name="bgColor"
+			value="#{geldSpendenController.bgColor}">
+		</f:viewParam>
+		<f:viewParam id="textColor" name="textColor"
+			value="#{geldSpendenController.textColor}">
+		</f:viewParam>
+		<f:viewParam id="titel" name="titel"
+			value="#{geldSpendenController.titel}">
+		</f:viewParam>
+		<f:viewParam id="aktionId" name="aktionId"
+			converter="javax.faces.Long"
+			value="#{geldSpendenController.aktionId}">
+		</f:viewParam>
+	</f:metadata>
+</h:head>
+<h:body
+	style="background-color: ##{geldSpendenController.bgColor}; color: ##{geldSpendenController.textColor}">
+	<h1><h:outputLabel value="#{geldSpendenController.titel}"></h:outputLabel></h1>
+	<p:messages globalOnly="true" />
+	<p:message for="bgColor" style="color: red;" />
+	<p:message for="textColor" style="color: red;" />
+	<h:form>
+		<h:panelGrid columns="3">
+			<h:outputLabel value="Name:"></h:outputLabel>
+			<p:inputText id="name"
+				value="#{geldSpendenController.spende.spenderName}">
+			</p:inputText>
+			<p:message for="name" style="color: red;" />
+			<h:outputLabel value="Konto-Nr.:"></h:outputLabel>
+			<p:inputText id="konto"
+				value="#{geldSpendenController.spende.konto.kontoNr}">
+			</p:inputText>
+			<p:message for="konto" style="color: red;" />
+			<h:outputLabel value="BLZ:"></h:outputLabel>
+			<p:inputText id="blz"
+				value="#{geldSpendenController.spende.konto.blz}">
+			</p:inputText>
+			<p:message for="blz" style="color: red;" />
+			<h:outputLabel value="Name der Bank:"></h:outputLabel>
+			<p:inputText id="name_bank"
+				value="#{geldSpendenController.spende.konto.nameDerBank}">
+			</p:inputText>
+			<p:message for="name_bank" style="color: red;" />
+			<h:outputLabel value="Spendenbetrag:"></h:outputLabel>
+			<h:panelGroup>
+				<p:inputText id="spendenbetrag"
+					value="#{geldSpendenController.spende.betrag}">
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+				</p:inputText> EUR
+			</h:panelGroup>
+			<p:message for="spendenbetrag" style="color: red;" />
+		</h:panelGrid>
+		<p:selectBooleanCheckbox value="#{geldSpendenController.spende.quittung}" />Ja, ich möchte eine Spendenquittung<br />
+		<p:commandButton value="Spenden" action="#{geldSpendenController.doSpende}" ajax="false" />
+	</h:form>
+</h:body>
+</html>
