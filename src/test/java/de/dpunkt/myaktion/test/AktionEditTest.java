@@ -1,6 +1,7 @@
 package de.dpunkt.myaktion.test;
 
 import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -10,10 +11,12 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import de.dpunkt.myaktion.controller.AktionEditController;
 import de.dpunkt.myaktion.controller.AktionEditController.Mode;
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Konto;
+import de.dpunkt.myaktion.model.Organisator;
 import de.dpunkt.myaktion.model.Spende;
 
 @RunWith(Arquillian.class)
@@ -22,7 +25,7 @@ public class AktionEditTest {
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
-				.addClasses(Aktion.class, Konto.class, Spende.class,
+				.addClasses(Aktion.class, Konto.class, Spende.class, Organisator.class,
 						AktionEditController.class)
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}

@@ -2,10 +2,13 @@ package de.dpunkt.myaktion.test;
 
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Konto;
+import de.dpunkt.myaktion.model.Organisator;
 import de.dpunkt.myaktion.model.Spende;
 import de.dpunkt.myaktion.model.Spende.Status;
 
 public class TestDataFactory {
+	private static Organisator organisator;
+
 	public static Aktion createTestAktion() {
 		Aktion aktion = new Aktion();
 		aktion.setName("Trikots für A-Jugend");
@@ -14,6 +17,10 @@ public class TestDataFactory {
 		aktion.setSpendenBetrag(20d);
 		aktion.setKonto(new Konto("Max Mustermann", "ABC Bank", "100200300",
 				"12345678"));
+		if (organisator == null) {
+			organisator = new Organisator("VornameOrg", "NachnameOrg", "email@org.de", "mypassword");
+		}
+		aktion.setOrganisator(organisator);
 		return aktion;
 	}
 

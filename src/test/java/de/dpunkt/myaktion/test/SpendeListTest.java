@@ -18,6 +18,7 @@ import de.dpunkt.myaktion.controller.GeldSpendenController;
 import de.dpunkt.myaktion.controller.SpendeListController;
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Konto;
+import de.dpunkt.myaktion.model.Organisator;
 import de.dpunkt.myaktion.model.Spende;
 import de.dpunkt.myaktion.services.AktionService;
 import de.dpunkt.myaktion.services.AktionServiceBean;
@@ -33,7 +34,7 @@ public class SpendeListTest {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
 				.addClasses(Aktion.class, Konto.class, Spende.class,
-						SpendeListController.class,
+						Organisator.class, SpendeListController.class,
 						GeldSpendenController.class, SpendeService.class,
 						SpendeServiceBean.class, AktionService.class,
 						AktionServiceBean.class, Resources.class,

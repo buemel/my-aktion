@@ -54,7 +54,7 @@ public class Aktion {
 	@OneToMany(mappedBy = "aktion", cascade = CascadeType.REMOVE)
 	private List<Spende> spenden;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Organisator organisator;
 
 	public Aktion() {

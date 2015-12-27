@@ -23,6 +23,16 @@ public class Organisator {
 	private String email;
 	@NotNull
 	private String passwort;
+	
+	public Organisator() {
+	}
+	
+	public Organisator(String vorname, String nachname, String email, String passwort) {
+		this.vorname = vorname;
+		this.nachname = nachname;
+		this.email = email;
+		this.passwort = passwort;
+	}
 
 	public String getVorname() {
 		return vorname;
