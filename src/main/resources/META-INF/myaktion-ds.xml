@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
 	<datasource jndi-name="java:jboss/datasources/MyAktionDS"
 		pool-name="myaktion" enabled="true" use-java-context="true">
-		<connection-url>jdbc:h2:file:~/data/myaktion</connection-url>
+		<connection-url>jdbc:h2:file:~/workspace/ws-luna/my-aktion/resources/h2/myaktion</connection-url>
 		<driver>h2</driver>
 		<security>
 			<user-name>sa</user-name>
