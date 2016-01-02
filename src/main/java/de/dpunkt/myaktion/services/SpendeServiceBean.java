@@ -2,6 +2,8 @@ package de.dpunkt.myaktion.services;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -16,6 +18,7 @@ public class SpendeServiceBean implements SpendeService {
 	EntityManager entityManager;
 
 	@Override
+	@RolesAllowed("Organisator")
 	public List<Spende> getSpendeList(Long aktionId) {
 		Aktion managedAktion = entityManager.find(Aktion.class, aktionId);
 		List<Spende> spenden = managedAktion.getSpenden();
@@ -25,6 +28,7 @@ public class SpendeServiceBean implements SpendeService {
 	}
 
 	@Override
+	@PermitAll
 	public void addSpende(Long aktionId, Spende spende) {
 		Aktion managedAktion = entityManager.find(Aktion.class, aktionId);
 		spende.setAktion(managedAktion);
