@@ -1,16 +1,19 @@
 package de.dpunkt.myaktion.services;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.annotation.Resource;
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
+//import javax.annotation.Resource;
+//import javax.annotation.security.RolesAllowed;
+//import javax.ejb.SessionContext;
+//import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 //import javax.ejb.TransactionManagement;
 //import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 //import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -19,12 +22,15 @@ import javax.persistence.TypedQuery;
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Organisator;
 import de.dpunkt.myaktion.util.LogTypes.TecLog;
+import de.dpunkt.myaktion.util.TransactionInterceptor;
 //import de.dpunkt.myaktion.util.TransactionInterceptor;
 
 //@TransactionManagement(TransactionManagementType.BEAN)
 //@Interceptors(TransactionInterceptor.class)
-@RolesAllowed("Organisator")
-@Stateless
+//@RolesAllowed("Organisator")
+//@Stateless
+@RequestScoped
+@Interceptors(TransactionInterceptor.class)
 public class AktionServiceBean implements AktionService, Serializable {
 	private static final long serialVersionUID = -5091381921805941879L;
 
@@ -34,8 +40,11 @@ public class AktionServiceBean implements AktionService, Serializable {
 	@Inject
 	private EntityManager entityManager;
 	
-	@Resource
-	private SessionContext sessionContext;
+	@Inject
+	private Principal principal;
+	
+//	@Resource
+//	private SessionContext sessionContext;
 	
 //	@Resource
 //	private UserTransaction userTransaction;
@@ -104,7 +113,9 @@ public class AktionServiceBean implements AktionService, Serializable {
 	}
 	
 	private Organisator getLoggedinOrganisator() {
-		String organisatorEmail = sessionContext.getCallerPrincipal().getName();
+		//String organisatorEmail = sessionContext.getCallerPrincipal().getName();
+		String organisatorEmail = principal.getName();
+		
 		Organisator organisator = entityManager.createNamedQuery(Organisator.findByEmail, Organisator.class)
 				.setParameter("email", organisatorEmail).getSingleResult();
 		return organisator;
