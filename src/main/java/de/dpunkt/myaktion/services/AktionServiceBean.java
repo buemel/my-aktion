@@ -8,14 +8,21 @@ import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+//import javax.ejb.TransactionManagement;
+//import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
+//import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+//import javax.transaction.UserTransaction;
 
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Organisator;
 import de.dpunkt.myaktion.util.LogTypes.TecLog;
+//import de.dpunkt.myaktion.util.TransactionInterceptor;
 
+//@TransactionManagement(TransactionManagementType.BEAN)
+//@Interceptors(TransactionInterceptor.class)
 @RolesAllowed("Organisator")
 @Stateless
 public class AktionServiceBean implements AktionService, Serializable {
@@ -29,6 +36,9 @@ public class AktionServiceBean implements AktionService, Serializable {
 	
 	@Resource
 	private SessionContext sessionContext;
+	
+//	@Resource
+//	private UserTransaction userTransaction;
 
 	@Override
 	public List<Aktion> getAllAktionen() {
@@ -59,6 +69,23 @@ public class AktionServiceBean implements AktionService, Serializable {
 	}
 
 	@Override
+//	public void addAktion(Aktion aktion) {
+//		try {
+//			userTransaction.begin();
+//			Organisator organisator = getLoggedinOrganisator();
+//			aktion.setOrganisator(organisator);
+//			entityManager.persist(aktion);
+//			userTransaction.commit();
+//		} catch (Exception e) {
+//			try {
+//				userTransaction.rollback();
+//				System.err.println("addAktion - Transaktion wurde zurückgerollt. Aktion: " + aktion.getName());
+//			} catch (Exception e2) {
+//				System.err.println(
+//						"addAktion - Fehler beim Zurückrollen von Transaktion. Aktion: " + aktion.getName());
+//			}
+//		}
+//	}
 	public void addAktion(Aktion aktion) {
 		Organisator organisator = getLoggedinOrganisator();
 		aktion.setOrganisator(organisator);
