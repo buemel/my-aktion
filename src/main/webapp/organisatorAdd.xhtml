@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Neuen Organisator anlegen</h1>
+		<h:form>
+		<h:panelGrid columns="3">
+			<h:outputLabel value="Vorname:"></h:outputLabel>
+			<p:inputText id="vorname"
+				value="#{organisatorEditController.organisator.vorname}">
+			</p:inputText>
+			<p:message for="vorname" style="color: red;" />
+			
+			<h:outputLabel value="Nachname:"></h:outputLabel>
+			<p:inputText id="nachname"
+				value="#{organisatorEditController.organisator.nachname}">
+			</p:inputText>
+			<p:message for="nachname" style="color: red;" />
+			
+			<h:outputLabel value="Email:"></h:outputLabel>
+			<p:inputText id="email"
+				value="#{organisatorEditController.organisator.email}">
+			</p:inputText>
+			<p:message for="email" style="color: red;" />
+			
+			<h:outputLabel value="Passwort:"></h:outputLabel>
+			<p:inputText id="passwort" type="password"
+				value="#{organisatorEditController.organisator.passwort}">
+			</p:inputText>
+			<p:message for="passwort" style="color: red;" />
+		</h:panelGrid>
+		<p:commandButton value="Anlegen" action="#{organisatorEditController.doCreate}" ajax="false" />
+		</h:form>
+	</ui:define>
+</ui:composition>

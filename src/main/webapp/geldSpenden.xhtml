@@ -47,6 +47,11 @@
 				value="#{geldSpendenController.spende.konto.blz}">
 			</p:inputText>
 			<p:message for="blz" style="color: red;" />
+			<h:outputLabel value="Name des Kontoinhabers:"></h:outputLabel>
+			<p:inputText id="name_kontoinhaber"
+				value="#{geldSpendenController.spende.konto.name}">
+			</p:inputText>
+			<p:message for="name_kontoinhaber" style="color: red;" />
 			<h:outputLabel value="Name der Bank:"></h:outputLabel>
 			<p:inputText id="name_bank"
 				value="#{geldSpendenController.spende.konto.nameDerBank}">
