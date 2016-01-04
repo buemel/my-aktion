@@ -6,7 +6,9 @@ import de.dpunkt.myaktion.model.Aktion;
 
 public interface AktionService {
 	List<Aktion> getAllAktionen();
-	void addAktion(Aktion aktion);
-	void updateAktion(Aktion aktion);
+	Aktion addAktion(Aktion aktion);
+	Aktion updateAktion(Aktion aktion);
 	void deleteAktion(Aktion aktion);
+	void deleteAktion(Long aktionId);
+	Aktion getAktion(Long aktionId);;
 }

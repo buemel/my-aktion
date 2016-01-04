@@ -15,7 +15,12 @@
 	</login-config>
 	<security-constraint>
 		<web-resource-collection>
+			<web-resource-name>Zugriff Organisator über Facelets</web-resource-name>
 			<url-pattern>/organisator/*</url-pattern>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Zugriff Organisator über REST</web-resource-name>
+			<url-pattern>/rest/organisator/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>Organisator</role-name>
@@ -27,4 +32,8 @@
 	<security-role>
 		<role-name>Organisator</role-name>
 	</security-role>
+	<servlet-mapping>
+		<servlet-name>javax.ws.rs.core.Application</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -95,15 +95,16 @@ public class AktionServiceBean implements AktionService, Serializable {
 //			}
 //		}
 //	}
-	public void addAktion(Aktion aktion) {
+	public Aktion addAktion(Aktion aktion) {
 		Organisator organisator = getLoggedinOrganisator();
 		aktion.setOrganisator(organisator);
 		entityManager.persist(aktion);
+		return aktion;
 	}
 	
 	@Override
-	public void updateAktion(Aktion aktion) {
-		entityManager.merge(aktion);
+	public Aktion updateAktion(Aktion aktion) {
+		return entityManager.merge(aktion);
 	}
 
 	@Override
@@ -121,4 +122,15 @@ public class AktionServiceBean implements AktionService, Serializable {
 		return organisator;
 	}
 	
+	@Override
+	public void deleteAktion(Long aktionId) {
+		Aktion managedAktion = getAktion(aktionId);
+		entityManager.remove(managedAktion);
+	}
+	
+	@Override
+	public Aktion getAktion(Long aktionId) {
+		Aktion managedAktion = entityManager.find(Aktion.class, aktionId);
+		return managedAktion;
+	}
 }

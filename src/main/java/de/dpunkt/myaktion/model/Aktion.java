@@ -18,10 +18,12 @@ import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @NamedQueries({	@NamedQuery(name=Aktion.findByOrganisator, query="SELECT a FROM Aktion a WHERE a.organisator = :organisator ORDER BY a.name"),
 	            @NamedQuery(name=Aktion.findAll, query="SELECT a from Aktion a ORDER BY a.name"),
 				@NamedQuery(name=Aktion.getBisherGespendet, query="SELECT SUM(s.betrag) FROM Spende s WHERE s.aktion = :action")})
+@XmlRootElement
 @Entity
 public class Aktion {
 	public static final String findByOrganisator = "Aktion.findByOrganisator";

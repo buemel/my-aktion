@@ -60,20 +60,32 @@ public class MockAktionServiceBean implements AktionService, Serializable {
 	}
 
 	@Override
-	public void addAktion(Aktion aktion) {
+	public Aktion addAktion(Aktion aktion) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void updateAktion(Aktion aktion) {
+	public Aktion updateAktion(Aktion aktion) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
 	public void deleteAktion(Aktion aktion) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void deleteAktion(Long aktionId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Aktion getAktion(Long aktionId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

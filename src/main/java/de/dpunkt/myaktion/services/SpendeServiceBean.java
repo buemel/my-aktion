@@ -1,5 +1,6 @@
 package de.dpunkt.myaktion.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import javax.persistence.TypedQuery;
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Spende;
 import de.dpunkt.myaktion.model.Spende.Status;
+import de.dpunkt.myaktion.services.exceptions.ObjectNotFoundException;
 import de.dpunkt.myaktion.util.LogTypes.FachLog;
 import de.dpunkt.myaktion.util.PerformanceAuditor;
 import de.dpunkt.myaktion.util.TransactionInterceptor;
@@ -64,6 +66,24 @@ public class SpendeServiceBean implements SpendeService {
 			count++;
 		}
 		logger.info("Es wurden " + count + " Spenden überwiesen.");
+	}
+
+	@Override
+	//@PermitAll
+	@Interceptors(TransactionInterceptor.class)
+	public List<Spende> getSpendeListPublic(Long aktionId) throws ObjectNotFoundException {
+		Aktion managedAktion = entityManager.find(Aktion.class, aktionId);
+		if (managedAktion == null)
+			throw new ObjectNotFoundException();
+		List<Spende> spenden = managedAktion.getSpenden();
+		List<Spende> result = new ArrayList<Spende>(spenden.size());
+		for (Spende spende : spenden) {
+			Spende filtered = new Spende();
+			filtered.setBetrag(spende.getBetrag());
+			filtered.setSpenderName(spende.getSpenderName());
+			result.add(filtered);
+		}
+		return result;
 	}
 	
 }

@@ -1,0 +1,21 @@
+8.4.1.1
+curl -k -c cookie.txt https://localhost:8443/my-aktion/rest/organisator/aktion/list
+curl -k -c cookie.txt -b cookie.txt --data-urlencode j_username=max@mustermann.de -d j_password=secret https://localhost:8443/my-aktion/j_security_check
+curl -k -b cookie.txt https://localhost:8443/my-aktion/rest/organisator/aktion/list
+
+curl -k -b cookie.txt -X DELETE https://localhost:8443/my-aktion/rest/organisator/aktion/18
+
+{"name":"55555555","spendenZiel":55555.0,"spendenBetrag":55.0,"konto":{"name":"55555555","nameDerBank":"55555555","kontoNr":"55555555","blz":"55555555"}}
+curl -k -b cookie.txt -H "Content-Type: application/json" -X POST --data "@test1.json" https://localhost:8443/my-aktion/rest/organisator/aktion
+
+{"name":"55555556","spendenZiel":55556.0,"spendenBetrag":56.0}
+curl -k -b cookie.txt -H "Content-Type: application/json" -X PUT --data "@test2.json" https://localhost:8443/my-aktion/rest/organisator/aktion/22
+
+curl -k -b cookie.txt https://localhost:8443/my-aktion/rest/organisator/spende/list/4
+
+curl -k -d "spenderName=Karl Meier&betrag=200&blz=86427531&kontoNr=654321&nameDerBank=YYY Bank&quittung=false" https://localhost:8443/my-aktion/rest/spende/4
+
+curl -k -H "Accept:application/xml" -b cookie.txt https://localhost:8443/my-aktion/rest/organisator/aktion/list
+curl -k -H "Accept:application/json" -b cookie.txt https://localhost:8443/my-aktion/rest/organisator/aktion/list
+
+curl -k https://localhost:8443/my-aktion/rest/spende/list/4
