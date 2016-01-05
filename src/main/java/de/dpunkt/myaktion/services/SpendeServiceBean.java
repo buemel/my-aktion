@@ -2,6 +2,7 @@ package de.dpunkt.myaktion.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //import javax.annotation.security.PermitAll;
@@ -16,6 +17,7 @@ import javax.persistence.TypedQuery;
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Spende;
 import de.dpunkt.myaktion.model.Spende.Status;
+import de.dpunkt.myaktion.monitor.ws.SpendeDelegatorService;
 import de.dpunkt.myaktion.services.exceptions.ObjectNotFoundException;
 import de.dpunkt.myaktion.util.LogTypes.FachLog;
 import de.dpunkt.myaktion.util.PerformanceAuditor;
@@ -46,12 +48,18 @@ public class SpendeServiceBean implements SpendeService {
 	//@PermitAll
 	@Interceptors(TransactionInterceptor.class)
 	public void addSpende(Long aktionId, Spende spende) {
+		try {
+			SpendeDelegatorService delegatorService = new SpendeDelegatorService();
+			delegatorService.getSpendeDelegatorPort().sendSpende(aktionId,  spende);
+		} catch(Exception e) {
+			logger.log(Level.SEVERE, "Spende nicht  weitergeleitet. Läuft der Glassfish?", e);
+		}
+		
 		Aktion managedAktion = entityManager.find(Aktion.class, aktionId);
 		spende.setAktion(managedAktion);
-		
 		entityManager.persist(spende);
 	}
-
+	
 	@Override
 	//@PermitAll
 	@Interceptors(PerformanceAuditor.class)

@@ -1,0 +1,23 @@
+asadmin create-domain --portbase 9000 --user admin domain_my-aktion
+
+asadmin start-domain domain_my-aktion
+
+
+mvn archetype:generate -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=webapp-javaee7 -DarchetypeVersion=0.3-SNAPSHOT -DarchetypeRepository=https://nexus.codehaus.org/content/repositories/snapshots
+
+groupId (de.dpunkt), artifactId (my-aktion-monitor), version (1.0-SNAPSHOT) und package (de.dpunkt.myaktion)
+
+<finalName>${project.artifactId}</finalName>
+
+asadmin deploy --port 9048 my-aktion-monitor.war
+
+asadmin redeploy --port 9048 --name my-aktion-monitor my-aktion-monitor.war
+
+asadmin undeploy --port 9048 my-aktion-monitor
+
+<output.dir>${env.AS_HOME}/glassfish/domains/domain_my-aktion/autodeploy</output.dir>
+
+<outputDirectory>${output.dir}</outputDirectory>
+
+keytool -importkeystore -srckeystore $JBOSS_HOME/standalone/configuration/my-aktion.keystore -destkeystore $AS_HOME/glassfish/domains/domain_my-aktion/config/keystore.jks
+keytool -importkeystore -srckeystore $JBOSS_HOME/standalone/configuration/my-aktion.keystore -destkeystore $AS_HOME/glassfish/domains/domain_my-aktion/config/cacerts.jks

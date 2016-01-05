@@ -1,0 +1,3 @@
+http://localhost:9080/my-aktion-monitor/SpendeDelegatorService?wsdl
+
+wsimport -d my-aktion/target/classes -s my-aktion/src/main/java http://localhost:9080/my-aktion-monitor/SpendeDelegatorService?wsdl
